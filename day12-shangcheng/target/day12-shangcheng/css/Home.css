@@ -1,0 +1,15 @@
+table font{
+    color: red;
+}
+td{
+    text-align: center;
+}
+a{
+    text-decoration: none;
+}
+#tr2{
+    background-color: slategray;
+}
+#tr2 a{
+    color: white;
+}

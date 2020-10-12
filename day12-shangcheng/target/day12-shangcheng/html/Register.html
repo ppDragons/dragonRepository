@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        #d2 {
+            width: 800px;
+            margin-left: 400px;
+            margin-top: 100px;
+            background-color: white;
+            border-radius: 20px;
+        }
+        input {
+            width: 400px;
+            height: 40px;
+            border-radius: 10px;
+            border-color: red;
+            margin-bottom: 10px;
+        }
+        span{
+            color: red;
+        }
+    </style>
+    <script>
+        //检查表单
+        function checkForm() {
+            if(checkEmail()&&confirmPassword1()&&checkPassword()&&checkUserName()&&checkName()&&checkDate()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //检查用户名
+        function checkUserName() {
+            var userVal = document.getElementById("userId").value;
+            var reg = /^[a-zA-Z_$]{4,12}$/;
+            var uSpan = document.getElementById("uSpan");
+            uSpan.innerText = "";
+            if(!reg.test(userVal)){
+                uSpan.innerText = "用户名格式不正确";
+                return false;
+            }else{
+                return true;
+            }
+        }
+        //检查密码
+        function checkPassword() {
+            var pw1Val = document.getElementById("pw1").value;
+            var reg = /^[a-zA-Z0-9]{6,12}$/;
+            var pw1Span = document.getElementById("pw1Span");
+            pw1Span.innerText = "";
+            if(!reg.test(pw1Val)){
+                pw1Span.innerText = "密码格式不正确";
+                return false;
+            }else{
+                return true;
+            }
+        }
+        //确认密码
+        function confirmPassword1() {
+            var pw1Val = document.getElementById("pw1").value;
+            var pw2Val = document.getElementById("pw2").value;
+            var pw2Span = document.getElementById("pw2Span");
+            pw2Span.innerText = "";
+            if(pw1Val!=pw2Val){
+                pw2Span.innerText = "两次密码不相同";
+                return false;
+            }else{
+                return true;
+            }
+        }
+        //确认邮箱格式
+        function checkEmail() {
+            var emailVal = document.getElementById("email").value;
+            var reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+            var emlSpan = document.getElementById("emlSpan");
+            emlSpan.innerText = "";
+            if(!reg.test(emailVal)){
+                emlSpan.innerText = "邮箱格式不正确";
+                return false;
+            }else{
+                return true;
+            }
+        }
+        //确认姓名
+        function checkName() {
+            var nameVal = document.getElementById("nameId").value;
+            var nameSpan = document.getElementById("nameSpan");
+            nameSpan.innerText = "";
+            if(/^\s*$/.test(nameVal)){
+                nameSpan.innerText = "姓名不能为空";
+                return false;
+            }else{
+                return true;
+            }
+        }
+        //确认日期
+        function checkDate() {
+            var dateVal = document.getElementById("dateId").value;
+            var dateSpan = document.getElementById("dateSpan");
+            dateSpan.innerText = "";
+            if(/^\s*$/.test(dateVal)){
+                dateSpan.innerText = "请选择日期";
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="d2">
+        <form onsubmit="return checkForm()" action="/RegisterServlet" method="get">
+            <h1>
+                会员注册<br>
+                <span>USER REGISTER</span>
+            </h1>
+            用户名：<input id="userId" type="text" placeholder="请输入用户名" name="username" onblur="checkUserName()">
+            <span id="uSpan"></span><br>
+            密码：<input id="pw1" type="password" placeholder="请输入密码" name="password" onblur="checkPassword()">
+            <span id="pw1Span"></span><br>
+            确认密码：<input id="pw2" type="password" placeholder="请输入确认密码" name="confirmPassword" onblur="confirmPassword1()">
+            <span id="pw2Span"></span><br>
+            Email:<input id="email" type="email" placeholder="请输入邮箱" name="email" onblur="checkEmail()">
+            <span id="emlSpan"></span><br>
+            姓名：<input id="nameId" type="text" placeholder="请输入姓名" name="name" onblur="checkName()">
+            <span id="nameSpan"></span><br>
+            性别:男<input type="radio"  name="sex" value="男" style="width: 20px" checked="true">
+            女<input type="radio"  name="sex" value="女" style="width: 20px"><br>
+            出生日期：<input id="dateId" type="date" placeholder="请输入出生日期" name="birthday" onblur="checkDate()">
+            <span id="dateSpan"></span><br>
+            <input type="submit" name="submit" value="提交">
+        </form>
+    </div>
+</body>
+</html>
